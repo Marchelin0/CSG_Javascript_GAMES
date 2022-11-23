@@ -1,84 +1,181 @@
-var data;
-var ringen = [];
+/*  **********************************************************
+    **             BEGIN klasse Spel met Levels             **
+    ********************************************************** */
 
-function preload() {
-    achtergrondmuziek = loadSound("sounds/bensound-dance.mp3");
-    // bron: https://www.bensound.com/royalty-free-music/track/dance
+    class Levels {
+      constructor() {
+      this.level = null;
+      this.maxLevel = 3;
+      this.actief = null;
+      this.levelGehaald = null;
+      this.afgelopen = null;
+      this.gewonnen = null;
+      this.alfa = 0.5;
+    }
     
-    raak = loadSound("sounds/score.wav");
-    data = loadJSON('assets/data.json');
-}
+    nieuwSpel() {
+      this.level = 0;
+      this.actief = false;
+      this.gewonnen = false;
+      this.afgelopen = false;
+      this.nieuwLevel();
+    }
+  
+    nieuwLevel() {
+      this.level++;
+      this.levelGehaald = false;
+    }
+  
+    update() {
+      this.alfa += random(-3,3) / 100;
+      if (this.alfa <= 0 || this.alfa >=1) {
+          this.alfa = 0.5;
+      }
+    }
+  
+     tekenAnimatie() {
+      push();
+      noStroke();
+      fill(120,130,150,this.alfa);
+     // rect(10,10,880,580);
+      pop();
+    }
+  
+    tekenScorebord() {
+      push();
+      fill(0,0,0,.8);
+      noStroke();
+      textSize(30);
+      var marge = 100;
 
-function setup() {
-    dataNaarArray();
+      fill(255);
+      text(" Dit is Level "+this.level+"\nHet spel is actief.\n\nKlik om het level te \"halen\".",marge,marge,canvas.width - 2 * marge,canvas.height - 2 * marge);   
+      pop();
+    }
+    
+    beginScherm() {
+      push();
+      noFill();
+      stroke(150,200,255,.7);
+      strokeWeight(5);
+      textSize(140);
+      text(" MacMaas,PacMac,MacPac",0,0,canvas.width,canvas.height * 2 / 3);
+      textSize(32);
+      strokeWeight(2);
+      fill(0,0,0,0.75);
+      text("In deze game kan Maas zo veel eten als hij wil, maar pas op voor de vijand (Schoenen). \n\nDruk op een toets om te beginnen.\n",0,canvas.height * 1 / 2,canvas.width,canvas.height * 1 / 3);
+      pop();
+    }
+  
+    levelScherm() {
+      push();
+      fill(50,80,80,.5);
+      stroke(150,200,255,.7);
+      strokeWeight(3);
+      text('Gefeliciteerd!\nJe hebt level '+this.level+' gehaald!\n\nDruk ENTER om naar level '+(this.level+1)+' te gaan.',0,0,canvas.width,canvas.height / 2);
+      pop();
+    }   
+  
+    eindScherm() {
+      var tekst = 'Je hebt het gehaald.';
+      if (this.gewonnen) {
+        tekst = 'Gefeliciteerd!';
+      }
+      push();
+      fill(0);
+      stroke(100,75,50,.8);
+      strokeWeight(3);
+      text(tekst + '\n\nDruk SPATIE voor nieuw spel.',0,0,canvas.width,canvas.height);
+      pop();
+    }    
+    
+    teken() {
+      background(achtergrond);
+      if (!this.actief) {
+          if (this.afgelopen) {
+              this.eindScherm();
+          }
+          else {
+              this.beginScherm();
+          }
+      }
+      else {
+          if (this.levelGehaald) {
+              this.levelScherm();
+          }
+          else {
+              this.tekenScorebord();
+              this.tekenAnimatie();
+          }
+      }
+    }
+  }
+  
+  /*  **********************************************************
+      **  EINDE klasse Spel met Levels  BEGIN hoofdprogramma  **
+      ********************************************************** */
+  
+  
+  function preload() {
+    achtergrond = loadImage("images/backgrounds/country_landscape.png");
+  }
+  
+  function setup() {
     createCanvas(windowWidth, windowHeight);
+    colorMode(RGB,255,255,255,1);
     textFont("Monospace");
-    textSize(40);
-    textAlign(CENTER,CENTER);
-    b1 = new Bal();
-    d1 = new Doel();
-}
-
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-    d1.bepaalDiameter();
-    d1.x = canvas.width / 2;
-    d1.y = canvas.height / 2;
-}
-
-function draw() {
-    maakAchtergrond();
-    d1.teken();
-    b1.teken();
-    if (d1.raakt(b1)) {
-        if (!d1.wordtGeraakt) {
-            d1.geraakt++;
-            raak.play();
-            d1.wordtGeraakt = true;
-        }
-    }
-    else {
-        d1.wordtGeraakt = false;
-    }
-    if (b1.actief) {
-        b1.beweeg();
-    }
-    else {
-        background(255);
-        text('Pas de grootte van je browserscherm aan zodat de bal zo vaak mogelijk het doel in het midden raakt.\n\nDruk ENTER om te starten.',canvas.width / 4,canvas.height / 4,canvas.width / 2,canvas.height / 2);
-    }
-}
-
-function dataNaarArray() {
-    var ring,x,y,diameter;
-    var ringData = data['ringen'];
-    for (var i = 0; i < ringData.length; i++) {
-        ring = ringData[i];
-        x = ring['middelpunt']['x'];
-        y = ring['middelpunt']['y'];
-        diameter = ring['diameter'];
-        ringen.push(new Ring(x, y, diameter));
+    textSize(44);
+    textAlign(CENTER,CENTER);  
+    frameRate(50);
+    spel = new Levels();
+    spel.nieuwSpel();
+    
   }
-}
-
-function maakAchtergrond() {
-    push();
-    background(255,0,200);
-    for (var i = 0; i < ringen.length; i++) {
-        ringen[i].teken();
-    }
-    text('Pas de grootte van je browserscherm aan zodat de bal zo vaak mogelijk het doel in het midden raakt.',0,0,canvas.width,canvas.height / 2);
-    textAlign(RIGHT,BOTTOM);
-    textSize(20);
-    text('Music: www.bensound.com',0,0,canvas.width,canvas.height);
-    pop();
-}
-
-function keyPressed() {
-  if (keyCode == ENTER) {
-    if (!b1.actief) {
-        b1.actief = true;
-        achtergrondmuziek.loop();
-    }
+  
+  function draw() {
+    spel.update();
+    spel.teken();
   }
-}
+  
+  function mousePressed() {
+    if (spel.actief) {
+      spel.levelGehaald = true;
+    }
+    if (spel.level>=spel.maxLevel) {
+      spel.afgelopen = true;
+      spel.gewonnen = true;
+      spel.actief = false;
+    }  
+  }
+  
+  function keyTyped() {
+    if (!spel.actief && !spel.levelGehaald) {
+      // begin spel
+      spel.actief = true;
+    }
+    if ((spel.levelGehaald && !spel.afgelopen) && keyCode == ENTER) {
+      // level gehaald tijdens het spel
+      spel.nieuwLevel();
+    }
+    if ((spel.afgelopen) && keyCode == 32) {
+      // einde spel
+      spel.nieuwSpel();
+    }  
+  }
+  var rooster = [];
+var patroon = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,
+               1,1,0,1,1,1,0,0,0,0,1,1,1,0,
+               1,1,1,1,0,1,0,1,1,1,1,0,1,0,
+               0,0,0,0,0,1,0,1,1,0,0,1,1,0,
+               0,1,1,1,0,1,0,1,1,0,0,1,0,0,
+               0,1,0,1,1,1,0,1,1,1,0,1,0,0,
+               0,1,0,0,0,0,0,0,0,1,0,1,1,1,
+               0,1,1,1,1,1,1,1,1,1,0,1,1,0];
+
+var grootte = 50;
+
+
+  
+  /*  **********************************************************
+      **               EINDE hoofdprogramma                   **
+      ********************************************************** */

@@ -23,14 +23,8 @@ function setup() {
 
 function draw() {
   background('lavender');
-
-  image(animatie[nummer],150,0,2*breedte,2*hoogte);
-  nummer++;
-
-  if (nummer == aantalBeeldjes) {
-    nummer = 0;
-  }
-
+  nummer = frameCount % aantalBeeldjes;
+  image(animatie[nummer],150,0,breedte,hoogte);
   text("frameCount=" + frameCount,5,40);
   text("nummer=" + nummer,5,70);
-}
+ }

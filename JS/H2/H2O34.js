@@ -66,6 +66,14 @@ class Jos {
       return false;
     }
   }
+  aanraken(alice) {
+    if (this.x == alice.x && this.y == alice.y) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
   
   toon() {
     image(this.animatie[this.frameNummer],this.x,this.y,raster.celGrootte,raster.celGrootte);
@@ -136,6 +144,9 @@ function draw() {
   
   if (eve.wordtGeraakt(alice) || eve.wordtGeraakt(bob)) {
     noLoop();
+  }
+  if(bob.aanraken(alice){
+    bob.beweeg
   }
   
   if (eve.gehaald) {

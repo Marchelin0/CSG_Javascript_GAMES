@@ -12,7 +12,7 @@ class Bom {
 class Jos {
   constructor() {
     this.x = 0;
-    this.y = 200;
+    this.y = 150;
     this.animatie = [];
     this.frameNummer =  3;
     this.stapGrootte = null;
@@ -79,7 +79,7 @@ function setup() {
   textFont("Verdana");
   textSize(90);
   
-  raster = new Raster(6,9);
+  raster = new Raster(24,18);
   
   raster.berekenCelGrootte();
   bom1 = new Bom();
@@ -90,6 +90,7 @@ function setup() {
     frameEve = loadImage("images/sprites/Eve100px/Eve_" + b + ".png");
     eve.animatie.push(frameEve);
   }
+  
   
   alice = new Vijand(700,200);
   alice.stapGrootte = 1*eve.stapGrootte;

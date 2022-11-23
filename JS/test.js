@@ -4,11 +4,19 @@ function setup() {
   canvas.parent('processing');
   //noLoop();
 }
+function preload() {
+  kever = loadImage("images/sprites/kever.png");
+}
 
 function draw() {
-  noStroke();
-  fill('steelblue');
-  ellipse(0,0,800);
-  fill('deepskyblue');
-  ellipse(450,450,400);
+  background('grey');  
+}
+function kevers(){ 
+  image(kever,25,25,50,50);
+}
+
+for (var i = 0;i < 10;i++) {
+  image(kever);
+  translate(50,0,0,0)
+
 }

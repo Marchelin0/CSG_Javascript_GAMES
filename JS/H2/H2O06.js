@@ -25,10 +25,26 @@ function draw() {
   if (keyIsDown(RIGHT_ARROW)) {
     xJos += celGrootte;
   }
+  if (keyIsDown(LEFT_ARROW)) {
+    xJos -= celGrootte;
+  }
+  if (keyIsDown(UP_ARROW)) {
+    yJos -= celGrootte;
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    yJos += celGrootte;
+  }
   
   xJos = constrain(xJos,0,width - celGrootte);
-  
-  image(spriteJos,xJos,yJos);
+  yJos = constrain(yJos,0,height - celGrootte);
+
+
+  if (xJos == 6*celGrootte
+    && yJos == 4*celGrootte) {
+    spriteJos.filter(erode);
+   }
+
+   image(spriteJos,xJos,yJos);
 }
 
 function tekenRaster() {

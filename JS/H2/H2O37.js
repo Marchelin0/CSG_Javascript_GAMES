@@ -28,6 +28,7 @@ class Knikker {
 
 var knikkerVerzameling = [];
 
+
 function setup() {
   canvas = createCanvas(1000,300);
   canvas.parent('processing');
@@ -36,10 +37,18 @@ function setup() {
   background(0,0,75,1);
   noStroke();
   k1 = new Knikker();
+
+    for (var b = 0; b < 10; b++) {
+    knikkerVerzameling.push(new Knikker());
+    }
+ 
+   
 }
 
 function draw() {
   background(0,0,75,0.2);
-  k1.beweeg();
-  k1.teken();
+  for (var n = 0;n < knikkerVerzameling.length;n++) {
+      knikkerVerzameling[n].beweeg();
+      knikkerVerzameling[n].teken();
+  }
 }
