@@ -2,6 +2,8 @@
     **             BEGIN klasse Spel met Levels             **
     ********************************************************** */
 
+    // hoi
+
     class Levels {
       constructor() {
       this.level = null;
