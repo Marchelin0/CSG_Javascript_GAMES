@@ -5,7 +5,9 @@
     // hoi
 
     class Levels {
-      constructor() {
+      constructor(b,r) {
+        this.bal = b;
+        this.raster = r;
       this.level = null;
       this.maxLevel = 3;
       this.actief = null;
@@ -14,7 +16,7 @@
       this.gewonnen = null;
       this.alfa = 0.5;
     }
-    
+    //
     nieuwSpel() {
       this.level = 0;
       this.actief = false;
@@ -33,6 +35,7 @@
       if (this.alfa <= 0 || this.alfa >=1) {
           this.alfa = 0.5;
       }
+      this.bal.beweeg();
     }
   
      tekenAnimatie() {
@@ -41,6 +44,8 @@
       fill(120,130,150,this.alfa);
      // rect(10,10,880,580);
       pop();
+      this.raster.teken();
+      this.bal.teken();
     }
   
     tekenScorebord() {
@@ -61,7 +66,7 @@
       stroke(150,200,255,.7);
       strokeWeight(5);
       textSize(140);
-      text(" MacMaas,PacMac,MacPac",0,0,canvas.width,canvas.height * 2 / 3);
+      text(" MacMaas",0,0,canvas.width,canvas.height * 2 / 3);
       textSize(32);
       strokeWeight(2);
       fill(0,0,0,0.75);
@@ -123,25 +128,30 @@
   }
   
   function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(1920,1080);
     colorMode(RGB,255,255,255,1);
     textFont("Monospace");
     textSize(44);
     textAlign(CENTER,CENTER);  
-    frameRate(50);
-    spel = new Levels();
+    frameRate(10);
+    bal = new Bal();
+    raster.berekenCelGrootte();
+    spel = new Levels(bal,raster);
     spel.nieuwSpel();
-    
   }
   
   function draw() {
     spel.update();
     spel.teken();
+    //bal.teken();
+    //bal.beweeg();
+    //raster.teken();
   }
   
   function mousePressed() {
     if (spel.actief) {
       spel.levelGehaald = true;
+
     }
     if (spel.level>=spel.maxLevel) {
       spel.afgelopen = true;
@@ -149,7 +159,6 @@
       spel.actief = false;
     }  
   }
-  
   function keyTyped() {
     if (!spel.actief && !spel.levelGehaald) {
       // begin spel
@@ -181,3 +190,23 @@ var grootte = 50;
   /*  **********************************************************
       **               EINDE hoofdprogramma                   **
       ********************************************************** */
+      var raster = {
+        aantalRijen: 13,
+        aantalKolommen: 23,
+        celGrootte: null,
+        
+        berekenCelGrootte() {
+          this.celGrootte = width / this.aantalKolommen;
+        },
+        teken() {
+          push();
+          noFill();
+          stroke('grey');
+          for (var rij = 0;rij < this.aantalRijen;rij++) {
+            for (var kolom = 0;kolom < this.aantalKolommen;kolom++) {
+              rect(kolom*this.celGrootte,rij*this.celGrootte,this.celGrootte,this.celGrootte);
+            }
+          }
+          pop();
+        }
+      }
