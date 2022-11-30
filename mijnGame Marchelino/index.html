@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mac-Maas</title>
+    <style>
+        #gameCanvas{
+            box-shadow: 10px 10px 20px black;
+        }
+        h1 {
+            text-align: center;
+            /*font-family: 'Courier New', Courier, monospace; tekst font en kleur nog samen uitkiezen
+            color: lightblue */ 
+        }
+        body{
+            display :flex;
+            justify-content: center;
+            overflow: hidden; /*geen scroll*/
+            height: 100vh;
+            background: linear-gradient(
+                0deg,
+                rgb(17, 51, 161) 50%,
+                rgb(34, 195, 96) 100%
+            );
+
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <h1>Mac-Maas</h1>
+    <canvas id="gameCanvas"></canvas>
+    <script src= 'JS/Game.js' type = 'module'></script>
+ </div>
+</body>
+</html>
