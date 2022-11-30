@@ -5,9 +5,11 @@
     // hoi
 
     class Levels {
-      constructor(b,r) {
-        this.bal = b;
-        this.raster = r;
+      constructor(b,r,v,m) {
+      this.bal = b;
+      this.raster = r;
+      this.vijand = v;
+      this.vijand2 = m;
       this.level = null;
       this.maxLevel = 3;
       this.actief = null;
@@ -36,6 +38,8 @@
           this.alfa = 0.5;
       }
       this.bal.beweeg();
+      this.vijand.beweeg();
+      this.vijand2.beweeg();
     }
   
      tekenAnimatie() {
@@ -46,6 +50,8 @@
       pop();
       this.raster.teken();
       this.bal.teken();
+      this.vijand.teken();
+      this.vijand2.teken();
     }
   
     tekenScorebord() {
@@ -136,8 +142,12 @@
     frameRate(10);
     bal = new Bal();
     raster.berekenCelGrootte();
-    spel = new Levels(bal,raster);
+    vijand = new Vijand();
+    vijand2 = new Vijand2();
+    spel = new Levels(bal,raster,vijand,vijand2);
     spel.nieuwSpel();
+
+    
   }
   
   function draw() {
@@ -210,3 +220,14 @@ var grootte = 50;
           pop();
         }
       }
+
+var timer;
+var ele = document.getElementById('timer');
+
+(function(){
+var sec = 0;
+timer = setInterval(()=>{
+ele.innerHTML = '00:'+sec;
+sec ++;
+}, 1000) // elke seconde
+})()
