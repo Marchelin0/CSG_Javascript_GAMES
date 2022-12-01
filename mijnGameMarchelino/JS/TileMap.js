@@ -3,10 +3,10 @@ export default class TileMap {
     this.tileSize = tileSize;
 
     this.yellowDot = new Image();
-    this.yellowDot.src = "../images/yellowDot.png";
+    this.yellowDot.src = "./images/yellowDot.png";
 
     this.wall = new Image();
-    this.wall.src = "../images/wall.png";
+    this.wall.src = "./images/wall.png";
   }
   //map nog overleggen
   map = [
@@ -43,7 +43,6 @@ export default class TileMap {
       size
     );
   }
-
 
   #drawWall(ctx, column, row, size) {
     ctx.drawImage(
