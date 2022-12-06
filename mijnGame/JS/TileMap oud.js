@@ -66,41 +66,41 @@ export default class TileMap {
   //1= wall
   //4= pacman
 
-  tekenmap(ctx) {
-    for (var rij = 0; rij < this.map.length; rij++) {
-      for (var column = 0; column < this.map[rij].length; column++) {
-        var tile = this.map[rij][column];
+  draw(ctx) {
+    for (let row = 0; row < this.map.length; row++) {
+      for (let column = 0; column < this.map[row].length; column++) {
+        let tile = this.map[row][column];
         if (tile === 1) {
-          this.#drawWall(ctx, column, rij, this.tileSize);
+          this.#drawWall(ctx, column, row, this.tileSize);
         } else if (tile === 0) {
-          this.#drawDot(ctx, column, rij, this.tileSize);
+          this.#drawDot(ctx, column, row, this.tileSize);
         }
 
         ctx.strokeStyle = "yellow"; 
         ctx.strokeRect(
           column * this.tileSize,
-          rij * this.tileSize,
+          row * this.tileSize,
           this.tileSize,
           this.tileSize
         );
       }
     }
   }
-  #drawDot(ctx, column, rij, size) {
+  #drawDot(ctx, column, row, size) {
     ctx.drawImage(
       this.yellowDot,
       column * this.tileSize,
-      rij * this.tileSize,
+      row * this.tileSize,
       size,
       size
     );
   }
 
-  #drawWall(ctx, column, rij, size) {
+  #drawWall(ctx, column, row, size) {
     ctx.drawImage(
       this.wall,
       column * this.tileSize,
-      rij * this.tileSize,
+      row * this.tileSize,
       size,
       size
     );
