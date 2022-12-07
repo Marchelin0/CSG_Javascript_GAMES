@@ -66,19 +66,21 @@ export default class TileMap {
   //1= wall
   //4= pacman
 
+
+  //ctx = context
   tekenmap(ctx) {
     for (var rij = 0; rij < this.map.length; rij++) {
-      for (var column = 0; column < this.map[rij].length; column++) {
-        var tile = this.map[rij][column];
-        if (tile === 1) {
-          this.#drawWall(ctx, column, rij, this.tileSize);
-        } else if (tile === 0) {
-          this.#drawDot(ctx, column, rij, this.tileSize);
+      for (var kolom = 0; kolom < this.map[rij].length; kolom++) {
+        var tile = this.map[rij][kolom]; 
+        if (tile === 1) {//als de waarde 1 is moet je de fucntie wall aanroepen met de volgende waarde/parameters 
+          this.#drawWall(ctx, kolom, rij, this.tileSize);
+        } else if (tile === 0) {//als de waarde 1 is moet je de fucntie dot aanroepen met de volgende waarde/parameters 
+          this.#drawDot(ctx, kolom, rij, this.tileSize);
         }
 
         ctx.strokeStyle = "yellow"; 
         ctx.strokeRect(
-          column * this.tileSize,
+          kolom * this.tileSize,
           rij * this.tileSize,
           this.tileSize,
           this.tileSize
@@ -86,20 +88,21 @@ export default class TileMap {
       }
     }
   }
-  #drawDot(ctx, column, rij, size) {
+  //functie die de dot tekent, (de coins)
+  #drawDot(ctx, kolom, rij, size) {
     ctx.drawImage(
       this.yellowDot,
-      column * this.tileSize,
+      kolom * this.tileSize,
       rij * this.tileSize,
       size,
       size
     );
   }
-
-  #drawWall(ctx, column, rij, size) {
+//functie die de muur tekent
+  #drawWall(ctx, kolom, rij, size) {
     ctx.drawImage(
       this.wall,
-      column * this.tileSize,
+      kolom * this.tileSize,
       rij * this.tileSize,
       size,
       size

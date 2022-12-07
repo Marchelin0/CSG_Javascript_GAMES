@@ -101,7 +101,7 @@ function preload() {
 function setup() {
   canvas = createCanvas(900,600);
   canvas.parent('processing');
-  frameRate(10);
+  frameRate(1);
   textFont("Verdana");
   textSize(90);
   raster.berekenCelGrootte();

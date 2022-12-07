@@ -2,8 +2,8 @@ class Vijand2 {
     constructor() {
         this.diameter = 75;
         this.straal = this.diameter / 2;
-        this.x = 300;
-        this.y = 300;
+        this.x = 293;
+        this.y = 293;
         this.kleur = 'blue' ;
         this.vx = random(-20,20);
         this.vy = this.vx + random(-5,5);
