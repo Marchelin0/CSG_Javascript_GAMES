@@ -19,6 +19,9 @@ class Vijand {
       this.x = constrain(this.x,0,width - raster.celGrootte);
       this.y = constrain(this.y,0,height - raster.celGrootte);
       }
+
+    
+
     teken() {
         push();
         noStroke();

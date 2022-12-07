@@ -66,7 +66,9 @@ export default class TileMap {
   //1= wall
   //4= pacman
 
-  draw(ctx) {
+  //ctx = context
+  //let wordt gebruikt hier ipv var zodat deze variable beperkt is en we hem niet ergens anders perongeluk kunnen gebruiken
+  draw(ctx) { 
     for (let row = 0; row < this.map.length; row++) {
       for (let column = 0; column < this.map[row].length; column++) {
         let tile = this.map[row][column];

@@ -29,6 +29,17 @@ class Bal {
             this.y = constrain(this.y,0,height - raster.celGrootte);
           }
 
+          Geraakt(Vijand) {
+            if (this.x == Vijand.x && this.y == Vijand.y) {
+              return true;
+            }
+            else {
+              return false;
+            }
+          }
+
+
+
     teken() {
         push();
         noStroke();

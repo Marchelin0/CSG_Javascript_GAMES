@@ -139,11 +139,11 @@
     textFont("Monospace");
     textSize(44);
     textAlign(CENTER,CENTER);  
-    frameRate(1);
+    frameRate(10);
     bal = new Bal();
     raster.berekenCelGrootte();
     vijand = new Vijand();
-    vijand2 = new Vijand2();
+    vijand2 = new Vijand();
     spel = new Levels(bal,raster,vijand,vijand2);
     spel.nieuwSpel();
 
@@ -153,6 +153,10 @@
   function draw() {
     spel.update();
     spel.teken();
+
+    if (bal.Geraakt(vijand) || bal.Geraakt(vijand2)) {
+      spel.afgelopen = true;
+  }
     //bal.teken();
     //bal.beweeg();
     //raster.teken();
