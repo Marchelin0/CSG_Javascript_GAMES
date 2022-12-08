@@ -3,12 +3,13 @@ class Bal {
         this.diameter = 75;
         this.straal = this.diameter / 2;
         this.x = 40;
-        this.y = 40;
+        this.y = 43;
         this.kleur = 200;
         this.vx = random(-20,20);
         this.vy = this.vx + random(-5,5);
         this.actief = false;
         this.constrain = (1920,1080);
+   
         
     }
         beweeg() {
@@ -31,10 +32,10 @@ class Bal {
 
           Geraakt(Vijand) {
             if (this.x == Vijand.x && this.y == Vijand.y) {
-              return true;
+             this.Geraakt= true;
             }
             else {
-              return false;
+            return false;
             }
           }
 
