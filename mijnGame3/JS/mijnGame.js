@@ -6,7 +6,7 @@
 
     class Levels {
       constructor(b,r,v,m) {
-      this.bal = b;
+      this.poppetje = b;
       this.raster = r;
       this.vijand = v;
       this.vijand2 = m;
@@ -37,7 +37,7 @@
       if (this.alfa <= 0 || this.alfa >=1) {
           this.alfa = 0.5;
       }
-      this.bal.beweeg();
+      this.poppetje.beweeg();
       this.vijand.beweeg();
       this.vijand2.beweeg();
     }
@@ -49,7 +49,7 @@
      // rect(10,10,880,580);
       pop();
       this.raster.teken();
-      this.bal.teken();
+      this.poppetje.teken();
       this.vijand.teken();
       this.vijand2.teken();
     }
@@ -101,6 +101,7 @@
       text(tekst + '\n\nDruk SPATIE voor nieuw spel.',0,0,canvas.width,canvas.height);
       pop();
     }    
+
     
     teken() {
       background(achtergrond);
@@ -140,11 +141,11 @@
     textSize(44);
     textAlign(CENTER,CENTER);  
     frameRate(5);
-    bal = new Bal();
+    poppetje = new Bal(40,43);
     raster.berekenCelGrootte();
     vijand = new Vijand(710,794);
     vijand2 = new Vijand(794,710);
-    spel = new Levels(bal,raster,vijand,vijand2);
+    spel = new Levels(poppetje  ,raster,vijand,vijand2);
     spel.nieuwSpel();
 
     
@@ -153,19 +154,23 @@
   function draw() {
     spel.update();
     spel.teken();
-
-    if (bal.Geraakt(vijand) || bal.Geraakt(vijand2)) {
-      spel.afgelopen();
     
+    if (poppetje.Geraakt(vijand) || poppetje.Geraakt(vijand2)) {
+      background('red');
+    fill('white');
+    text("Je hebt verloren!",30,300);
+    noLoop(); 
   }
 
-  if(spel.afgelopen){
-    text("Het spel is voorbij");
-  }
+  
+
+   
     //bal.teken();
     //bal.beweeg();
     //raster.teken();
   }
+
+  
   
   function mousePressed() {
     if (spel.actief) {
