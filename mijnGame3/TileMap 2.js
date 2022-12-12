@@ -1,4 +1,4 @@
-import Pacman from "./Pacman.js";
+import Pacman from "./Pacman.1";
 export default class TileMap {
   constructor(tileSize) {
     this.tileSize = tileSize;
@@ -49,7 +49,7 @@ export default class TileMap {
   ]; */
   map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -67,42 +67,44 @@ export default class TileMap {
   //4= pacman
 
   //ctx = context
-  //let wordt gebruikt hier ipv var zodat deze variable beperkt is en we hem niet ergens anders perongeluk kunnen gebruiken
-  draw(ctx) { 
-    for (let row = 0; row < this.map.length; row++) {
-      for (let column = 0; column < this.map[row].length; column++) {
-        let tile = this.map[row][column];
+  tekenmap(ctx) {
+    for (var rij = 0; rij < this.map.length; rij++) {
+      for (var kolom = 0; kolom < this.map[rij].length; kolom++) {
+        var tile = this.map[rij][kolom];
         if (tile === 1) {
-          this.#drawWall(ctx, column, row, this.tileSize);
+          //als de waarde 1 is moet je de fucntie wall aanroepen met de volgende waarde/parameters
+          this.#drawWall(ctx, kolom, rij, this.tileSize);
         } else if (tile === 0) {
-          this.#drawDot(ctx, column, row, this.tileSize);
+          //als de waarde 1 is moet je de fucntie dot aanroepen met de volgende waarde/parameters
+          this.#drawDot(ctx, kolom, rij, this.tileSize);
         }
 
-        ctx.strokeStyle = "yellow"; 
+        ctx.strokeStyle = "yellow";
         ctx.strokeRect(
-          column * this.tileSize,
-          row * this.tileSize,
+          kolom * this.tileSize,
+          rij * this.tileSize,
           this.tileSize,
           this.tileSize
         );
       }
     }
   }
-  #drawDot(ctx, column, row, size) {
+  //functie die de dot tekent, (de coins)
+  #drawDot(ctx, kolom, rij, size) {
     ctx.drawImage(
       this.yellowDot,
-      column * this.tileSize,
-      row * this.tileSize,
+      kolom * this.tileSize,
+      rij * this.tileSize,
       size,
       size
     );
   }
-
-  #drawWall(ctx, column, row, size) {
+  //functie die de muur tekent
+  #drawWall(ctx, kolom, rij, size) {
     ctx.drawImage(
       this.wall,
-      column * this.tileSize,
-      row * this.tileSize,
+      kolom * this.tileSize,
+      rij * this.tileSize,
       size,
       size
     );
