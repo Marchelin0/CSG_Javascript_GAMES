@@ -9,7 +9,7 @@ export default class Pacman {
     this.tileMap = tileMap;
     this.#loadPacmanImages();
 
-    this.backgroundmusic = new Audio ('../sounds/background.mp3')
+    this.backgroundmusic = new Audio ('./sounds/background.mp3')
   }
   draw(ctx){
     ctx.drawImage(
@@ -41,7 +41,7 @@ export default class Pacman {
       pacmanImage4,
     ];
 
-    this.pacmanImageIndex = 0;
+    this.pacmanImageIndex = 1;
   }
 
 

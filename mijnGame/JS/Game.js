@@ -13,8 +13,12 @@ function gameLoop() {
   tileMap.draw(ctx);
   pacman.draw(ctx);
 }
-
-
+function draw() {
+  bal.teken();
+}
+function setup () {
+poppetje = new Bal(40,43);
+}
 tileMap.setCanvasSize(canvas);
 setInterval(gameLoop, 1000 / 75);
 
