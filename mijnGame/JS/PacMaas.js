@@ -8,6 +8,8 @@ export default class Pacman {
     this.velocity = velocity;
     this.tileMap = tileMap;
     this.#loadPacmanImages();
+
+    this.backgroundmusic = new Audio ('../sounds/background.mp3')
   }
   draw(ctx){
     ctx.drawImage(
@@ -39,7 +41,7 @@ export default class Pacman {
       pacmanImage4,
     ];
 
-    this.pacmanImageIndex = 2;
+    this.pacmanImageIndex = 0;
   }
 
 

@@ -38,8 +38,8 @@
           this.alfa = 0.5;
       }
       this.poppetje.beweeg();
-      this.vijand.beweeg();
-      this.vijand2.beweeg();
+      // this.vijand.beweeg();
+      // this.vijand2.beweeg();
     }
   
      tekenAnimatie() {

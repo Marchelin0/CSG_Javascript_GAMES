@@ -1,7 +1,7 @@
 import TileMap from "./TileMap.js";
-import Pacman from "./Pacman.js";
+import Pacman from "./PacMaas.js";
 
-const tileSize = 32;
+const tileSize = 48;
 const velocity = 1;
 
 const canvas = document.getElementById("gameCanvas");
@@ -14,5 +14,7 @@ function gameLoop() {
   pacman.draw(ctx);
 }
 
+
 tileMap.setCanvasSize(canvas);
 setInterval(gameLoop, 1000 / 75);
+
