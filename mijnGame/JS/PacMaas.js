@@ -1,4 +1,5 @@
-
+import Richting from "./Richting.js";
+import Beweeg from "./Richting.js";
 
 export default class Pacman {
   constructor(x, y, tileSize, velocity, tileMap) {
@@ -7,18 +8,23 @@ export default class Pacman {
     this.tileSize = tileSize;
     this.velocity = velocity;
     this.tileMap = tileMap;
+
+    this.currentRichting = null;
+    this.requestedRichting = null;
     this.#loadPacmanImages();
 
-    this.backgroundmusic = new Audio ('./sounds/background.mp3')
+    document.addEventListener("keydown", this.#keydown);
+
+    this.backgroundmusic = new Audio("./sounds/background.mp3");
   }
-  draw(ctx){
+  draw(ctx) {
     ctx.drawImage(
-        this.pacmanImages[this.pacmanImageIndex],
-        this.x,
-        this.y,
-        this.tileSize,
-        this.tileSize
-      );
+      this.pacmanImages[this.pacmanImageIndex],
+      this.x,
+      this.y,
+      this.tileSize,
+      this.tileSize
+    );
   }
 
   #loadPacmanImages() {
@@ -43,30 +49,36 @@ export default class Pacman {
 
     this.pacmanImageIndex = 1;
   }
-
-  beweeg() {
-    if (keyIsDown(LEFT_ARROW)) {
-        this.x -= 10;
-      }
-      if (keyIsDown(RIGHT_ARROW)) {
-        this.x += 10;
-      }
-      if (keyIsDown(UP_ARROW)) {
-        this.y -= 10;
-      }
-      if (keyIsDown(DOWN_ARROW)) {
-        this.y += 10;
-      }
-    
-    this.x = constrain(this.x,0,width - raster.celGrootte);
-    this.y = constrain(this.y,0,height - raster.celGrootte);
-  }
-    
+  // eventlistener gebruiken, dus als het volgene 'event' gebeurd, dan.....
+  #keydown = (event) => {
+    // pijltje omhoog
+    if (event.keyCode == 38) {
+      //38 is de keycode voor het pijltje omhoog etc.
+      if (this.currentRichting == Richting.down) 
+      this.currentRichting == Richting.up;
+      this.requestedRichting == Richting.up;
+    }
+    // pijltje naarbeneden
+    if (event.keyCode == 38) {
+      if (this.currentRichting == Richting.up) 
+      this.currentRichting == Richting.down;
+      this.requestedRichting == Richting.down;
+    }
+    // pijltje naar links
+    if (event.keyCode == 38) {      
+      if (this.currentRichting == Richting.right) 
+      this.currentRichting == Richting.left;
+      this.requestedRichting == Richting.left;
+      
+    }
+    // pijltje naar rechts
+    if (event.keyCode == 38) {
+      if (this.currentRichting == Richting.left) 
+      this.currentRichting == Richting.right;
+      this.requestedRichting == Richting.right;
+    }
+  };
 }
-
-
-
-
 
 // Pacman( voor welke waardes pacman zelf nodig heeft in de constructor
 //     column * this.tileSize,
