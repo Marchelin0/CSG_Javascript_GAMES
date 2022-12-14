@@ -17,12 +17,12 @@ function gameLoop() {
   // vijand2.draw(ctx);
 }
 
-function setup(ctx) {
-  pacmaas = new Pacman(o, o);
-  //  vijand1 = new Vijand(10, 10);
-  //  vijand2 = new Vijand(20, 20);
-}
+// function setup(ctx) {
+//   pacmaas = new Pacman(o, o);
+//   //  vijand1 = new Vijand(10, 10);
+//   //  vijand2 = new Vijand(20, 20);
+// }
 
-function draw() {}
+// function draw() {}
 tileMap.setCanvasSize(canvas);
 setInterval(gameLoop, 1000 / 75);

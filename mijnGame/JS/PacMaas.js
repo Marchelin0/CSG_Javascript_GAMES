@@ -47,7 +47,7 @@ export default class Pacman {
       pacmanImage4,
     ];
 
-    this.pacmanImageIndex = 1;
+    this.pacmanImageIndex = 2;
   }
   // eventlistener gebruiken, dus als het volgene 'event' gebeurd, dan.....
   #keydown = (event) => {
@@ -59,25 +59,26 @@ export default class Pacman {
       this.requestedRichting == Richting.up;
     }
     // pijltje naarbeneden
-    if (event.keyCode == 38) {
+    if (event.keyCode == 40 ) {
       if (this.currentRichting == Richting.up) 
       this.currentRichting == Richting.down;
       this.requestedRichting == Richting.down;
     }
     // pijltje naar links
-    if (event.keyCode == 38) {      
+    if (event.keyCode == 37) {      
       if (this.currentRichting == Richting.right) 
       this.currentRichting == Richting.left;
       this.requestedRichting == Richting.left;
       
     }
     // pijltje naar rechts
-    if (event.keyCode == 38) {
+    if (event.keyCode == 39) {
       if (this.currentRichting == Richting.left) 
       this.currentRichting == Richting.right;
       this.requestedRichting == Richting.right;
     }
-  };
+  }
+
 }
 
 // Pacman( voor welke waardes pacman zelf nodig heeft in de constructor

@@ -4,7 +4,7 @@ export default class TileMap {
     this.tileSize = tileSize;
 
     this.burgir = new Image();
-    this.burgir.src = "./images/burgir.png";
+    this.burgir.src = "./images/burgir2.png";
 
     this.wall = new Image();
     this.wall.src = "./images/wall.png";
@@ -78,13 +78,13 @@ export default class TileMap {
           this.#drawBurgir(ctx, column, row, this.tileSize);
         }
 
-        // ctx.strokeStyle = "yellow"; //het highliten van de buitenkant van de borders van de cellen, gebruiken bij het coderen.
-        // ctx.strokeRect(
-        //   column * this.tileSize,
-        //   row * this.tileSize,
-        //   this.tileSize,
-        //   this.tileSize
-        // );
+        ctx.strokeStyle = "yellow"; //het highliten van de buitenkant van de borders van de cellen, gebruiken bij het coderen.
+        ctx.strokeRect(
+          column * this.tileSize,
+          row * this.tileSize,
+          this.tileSize,
+          this.tileSize
+        );
       }
     }
   }
