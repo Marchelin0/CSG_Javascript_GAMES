@@ -12,7 +12,6 @@ export default class Vijand {
         this.stapGrootte = width / 23,height / 13 ;
         
     }
-    
     beweeg() {
       this.x += floor(random(-1,2))*this.stapGrootte;
       this.y += floor(random(-1,2))*this.stapGrootte;
